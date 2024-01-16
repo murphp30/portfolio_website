@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en-US">
+{% extends "base.html" %}
+<head>
+    <meta charset="utf-8" />
+    <title>HigginsVerse Personality Test</title>
+    
+</head>
+<body>
+    
+    {% block page_content %}
+        <h1>Hello and welcome to the HigginsVerse Personality Test.</h1>
+        <p><a href="{% url 'personality_test:detail' 1 %}">Take the test.</a></p>
+    {% endblock page_content %}
+</body>
+</html>
