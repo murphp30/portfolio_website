@@ -11,7 +11,9 @@ def index(request):
 
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    return render(request, "personality_test/detail.html", {"question":question})
+    return render(request, 
+                  "personality_test/detail.html", 
+                  {"question":question})
 
 def results(request):
     questions = Question.objects.all()
@@ -23,6 +25,22 @@ def results(request):
         "The Purple Onion":0,
         "John's father":0
     }
+    character_blurb = {
+        "Tommy Shlug": "You're some man for one man. Be careful driving \
+                        the bus for NATO.",
+        "Francis 'The Viper' Higgins": "From the mean streets of Castletown \
+                                        to an internet media mogul.",
+        "Fontaine": "I'm here to inform you, you got a son!",
+        "Conor Williams": "You have a mysterious past but that's ok \
+                           because you can drive away from it in the new \
+                           Mercedes E class.",
+        "The Purple Onion": "A senior ticket for yourself is it? \
+                             You enjoy the simpler thhings in life, \
+                             like riding the bus ten times a day.",
+        "John's father": "A great man, gone! \
+                          You should Zurich it up incase you meet a similar \
+                          fate on the mighty Eiger."
+    }
     for q in questions:
         choices = q.choice_set.all()
         for c in choices:
@@ -31,7 +49,11 @@ def results(request):
             c.votes = 0
             c.save()
     max_character = max(character_tally, key=character_tally.get)
-    return render(request, "personality_test/results.html", {"character":max_character})
+    
+    return render(request, 
+                  "personality_test/results.html", 
+                  {"character":max_character,
+                   "blurb": character_blurb[max_character]})
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -54,7 +76,8 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         if question.id < Question.objects.count():
-            return HttpResponseRedirect(reverse("personality_test:detail", args=(question.id + 1,)))
+            return HttpResponseRedirect(reverse("personality_test:detail",
+                                                args=(question.id + 1,)))
         else:
             
             return HttpResponseRedirect(reverse("personality_test:results"))
