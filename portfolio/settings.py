@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'personality_test.apps.PersonalityTestConfig',
+    'diplomacy_country_assignment',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
