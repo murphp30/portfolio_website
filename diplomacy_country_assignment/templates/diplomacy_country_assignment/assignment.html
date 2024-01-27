@@ -15,26 +15,56 @@
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
             {% csrf_token %}
         <table>
-            
-            
+            <thead>
+                {% for form in formset|slice:":1" %}
                 <tr>
-                    {% for form in formset|slice:":1" %}
+                    
                         {% for field in form %}
-                        {% if not field.is_hidden %}
-                        <th>{{ field.label }}</th>
-                        {% endif %}
+                            {% if not field.is_hidden %}
+                                {% if field.label != "Countries" %}
+                                    <th rowspan="2">{{ field.label }}</th>
+                                {% else %}
+                                    <th colspan="2">{{ field.label }}</th>
+                                {% endif %}
+                            {% endif %}
 
                         {% endfor %}
+                    
+                </tr>
+                <tr>
+                    {% for field in form %}
+                        {% if field.label == "Countries" %}
+                            {% for check in field.subwidgets %}
+                            
+                            <th>{{ check.data.label }}</th>
+                            
+                            {% endfor %}
+                        {% endif %}
                     {% endfor %}
                 </tr>
+                {% endfor %}
+            </thead>
+            <tbody>
                 {% for form in formset %}
                 <tr>
                     {% for field in form %}
-                    <td>{{ field }}</td>
+                    {% if not field.is_hidden %}
+                        {% if field.label != "Countries" %}
+                            <td>{{ field }}</td>
+                        {% else %}
+                            {% for check in form.countries %}
+                                <td>
+                                    <label for="{{ check.id_for_label }}">{{ check.tag }}</label>
+                                </td>
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
                     {% endfor %}
+
                 </tr>
                 
                 {% endfor %}
+            </tbody>
         </table>
         <input type="submit" value="Submit">
         </form>

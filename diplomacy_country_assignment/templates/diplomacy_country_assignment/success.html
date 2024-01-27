@@ -9,10 +9,10 @@
 <body>
 
     {% block page_content %}
-    <h1>BYE!</h1>
     {% for player, country in new_roles.items %}
     <p>{{ player }} will play as {{ country }}</p>
     {% endfor %}
+    <h1>BYE!</h1>
     {% endblock page_content %}
 </body>
 </html>

@@ -1,5 +1,4 @@
 from django import forms
-# from django.forms import formset_factory
 
 COUNTRIES_CHOICES = {
     "britain": "Britain",
@@ -11,12 +10,20 @@ COUNTRIES_CHOICES = {
     "turkey": "Turkey"
 }
 
+from django.utils.safestring import mark_safe
+
+class HorizWidget(forms.CheckboxSelectMultiple):
+
+    def render(self, *args, **kwargs):
+        output = super(HorizWidget, self).render(*args,**kwargs) 
+        return mark_safe(output.replace(u'</div><div>', u''))
+    
 class AssignmentForm(forms.Form):
     player_name = forms.CharField(max_length=20, required=True)
     player_email = forms.EmailField(widget=forms.HiddenInput(),required=False)
     countries = forms.MultipleChoiceField(
         required=False,
-        widget=forms.CheckboxSelectMultiple,
+        widget=HorizWidget,
         choices=COUNTRIES_CHOICES,
     )
     # britain = forms.BooleanField(required=False)
