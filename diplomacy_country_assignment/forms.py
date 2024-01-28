@@ -20,23 +20,16 @@ class HorizWidget(forms.CheckboxSelectMultiple):
     
 class AssignmentForm(forms.Form):
     player_name = forms.CharField(max_length=20, required=True)
-    player_email = forms.EmailField(widget=forms.HiddenInput(),required=False)
+    player_email = forms.EmailField(required=True, help_text="Required. Will email the player with their assigned country.")
     countries = forms.MultipleChoiceField(
         required=False,
         widget=HorizWidget,
         choices=COUNTRIES_CHOICES,
+        help_text="Check box if player has already played as that country."
     )
-    # britain = forms.BooleanField(required=False)
-    # france = forms.BooleanField(required=False)
-    # germany = forms.BooleanField(required=False)
-    # austria = forms.BooleanField(required=False)
-    # italy = forms.BooleanField(required=False)
-    # russia = forms.BooleanField(required=False)
-    # turkey = forms.BooleanField(required=False)
     def clean_player_name(self):
         player_name = self.cleaned_data["player_name"]
         return player_name
     def clean_player_email(self):
         player_email = self.cleaned_data["player_email"]
         return player_email
-

@@ -1,6 +1,7 @@
 import numpy as np
 from random import shuffle
 
+from django.core.mail import send_mass_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.forms import formset_factory
 from django.shortcuts import get_object_or_404, render
@@ -11,9 +12,10 @@ from diplomacy_country_assignment.forms import AssignmentForm, COUNTRIES_CHOICES
 # Create your views here.
 def country_assign(formset):
     disallowed = {}
+    player_emails = {}
     for form in formset:
         disallowed[form.cleaned_data["player_name"]] = form.cleaned_data["countries"]
-    
+        player_emails[form.cleaned_data["player_name"]] = form.cleaned_data["player_email"]
     # ensure all lists are same length
     max_games = np.max([len(val) for val in disallowed.values()])
     for player in disallowed:
@@ -40,7 +42,28 @@ def country_assign(formset):
 
 
     new_roles = {player:COUNTRIES_CHOICES[country] for player, country in zip(player_names,countries)}
+    messages = []
+    for player in new_roles:
+        messages.append(email_players(player, player_emails[player], new_roles[player]))
+    messages = tuple(messages)
+    send_mass_mail(messages, fail_silently=False)
     return new_roles
+
+def email_players(name, email, country):
+    #send email to all players. Takes player name, player email and player country
+    # sender_email="" #sender email
+    to = [email]
+    subject = "Diplomacy Times January 1901"
+    text = "Europe on the brink of war!\nAs relations between " +\
+    country +\
+    " and their neighbours deteriorates, it is up to " +\
+    name +\
+    " to take the nation's helm and lead them through the darkest hours the continent has faced in centuries.\n" +\
+    """Hello, """ + name + """. For this game of Diplomacy you will be playing as """ + country +\
+    """.\nGood luck and have fun!"""
+
+    message = (subject, text, None, to)
+    return message
 
 def assignment(request):
     AssignmentFormSet = formset_factory(AssignmentForm, min_num=7,extra=0)

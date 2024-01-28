@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en-US">
-{% extends "base.html" %}
+{% load static %}
 <head>
     <meta charset="utf-8" />
     <title>Diplomacy Country Assignment</title>
-    
+   
+    <link rel="stylesheet" href="{% static 'diplomacy_country_assignment/style.css' %}">
 </head>
 <body>
     
-    {% block page_content %}
         <h1>Hello and welcome to the Diplomacy Country Assignment tool.</h1>
         <form action="" method="post">
             {{ formset.management_form}}
@@ -20,13 +20,14 @@
                 <tr>
                     
                         {% for field in form %}
-                            {% if not field.is_hidden %}
+                            
                                 {% if field.label != "Countries" %}
-                                    <th rowspan="2">{{ field.label }}</th>
+                                    <th title="{{ field.help_text }}" rowspan="2">{{ field.label }}</th>
                                 {% else %}
-                                    <th colspan="2">{{ field.label }}</th>
+                                    <th title="{{ field.help_text }}" colspan="7">{{ field.label }}</th>
+                                    
                                 {% endif %}
-                            {% endif %}
+                            
 
                         {% endfor %}
                     
@@ -48,7 +49,7 @@
                 {% for form in formset %}
                 <tr>
                     {% for field in form %}
-                    {% if not field.is_hidden %}
+                    
                         {% if field.label != "Countries" %}
                             <td>{{ field }}</td>
                         {% else %}
@@ -58,7 +59,7 @@
                                 </td>
                             {% endfor %}
                         {% endif %}
-                    {% endif %}
+                    
                     {% endfor %}
 
                 </tr>
@@ -68,6 +69,5 @@
         </table>
         <input type="submit" value="Submit">
         </form>
-    {% endblock page_content %}
 </body>
 </html>
