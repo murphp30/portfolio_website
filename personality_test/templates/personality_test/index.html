@@ -1,16 +1,15 @@
-<!doctype html>
-<html lang="en-US">
+
 {% extends "base.html" %}
-<head>
-    <meta charset="utf-8" />
-    <title>HigginsVerse Personality Test</title>
+
+{% block title %}
+    HigginsVerse Personality Test
+{% endblock title %}
     
-</head>
-<body>
+{% block page_content %}
+    <h1>Hello and welcome to the HigginsVerse Personality Test.</h1>
+    <p>This personality test will determin beyond all doubt which 
+    <a href="https://www.youtube.com/@FrancisHiggins">Francis Higgins</a> Extended Universe charater you are most similar to.</p>
+    <p><a href="{% url 'personality_test:detail' 1 %}">Take the test.</a></p>
+{% endblock page_content %}
+
     
-    {% block page_content %}
-        <h1>Hello and welcome to the HigginsVerse Personality Test.</h1>
-        <p><a href="{% url 'personality_test:detail' 1 %}">Take the test.</a></p>
-    {% endblock page_content %}
-</body>
-</html>

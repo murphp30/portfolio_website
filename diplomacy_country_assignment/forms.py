@@ -19,8 +19,14 @@ class HorizWidget(forms.CheckboxSelectMultiple):
         return mark_safe(output.replace(u'</div><div>', u''))
     
 class AssignmentForm(forms.Form):
-    player_name = forms.CharField(max_length=20, required=True)
-    player_email = forms.EmailField(required=True, help_text="Required. Will email the player with their assigned country.")
+    error_css_class = "error"
+    required_css_class = "required"
+    player_name = forms.CharField(max_length=20,
+                                  required=True,
+                                  error_messages={"required": "Please enter player name"})
+    player_email = forms.EmailField(required=True,
+                                    help_text="Required. Will email the player with their assigned country.",
+                                    error_messages={"required": "Please enter player email."})
     countries = forms.MultipleChoiceField(
         required=False,
         widget=HorizWidget,

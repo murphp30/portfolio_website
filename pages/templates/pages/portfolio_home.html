@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}
+Pearse's Portfolio
+{% endblock title %}
+    
+{% block page_content %}
+        <h1>Pearse's Portfolio Page</h1>
+        <p>Hello and welcome to my silly portfolio. Here you will
+            eventually find links to some web apps I've been working on.
+        </p>
+        <ul>
+        <li><a href="{% url 'personality_test:index' %}">Find out which of Francis Higgins' 
+            characters you are here. Work in progress.</a></li>
+        <li><a href="{% url 'diplomacy_country_assignment:assignment' %}">Or set up a game of Diplomacy here. </a></li>
+        <!-- <li><a href="{% url 'pages:ireland_pop_density' %}">Population density of Ireland.</a></li> -->
+        </ul>
+        <p><a href="{% url 'pages:index' %}">Take me home!</a></p>
+{% endblock page_content %}

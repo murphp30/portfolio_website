@@ -1,0 +1,57 @@
+{% extends "webpage0.html" %}
+{% load static %}
+
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+{% block main %}
+<div class="w3-main" style="margin-left:250px">
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">Pearse Murphy</h1>
+      <p>I am currently a postdoctoral researcher at Observatoire de Paris where I am developing
+        a machine learning algorithm to automatically detect solar radio emission in
+        <a href="https://nenufar.obs-nancay.fr/en/homepage-en/">NenuFAR</a> observations.</p>
+      <p>I completed my PhD at Trinity College Dublin and the Dublin Institute for Advanced Studies (DIAS)
+        under the co-supervision of Prof. Peter Gallagher and Dr. Eoin Carley in 2022. 
+        My research focused on interferometric radio imaging of solar bursts 
+        using the LOw Frequency ARray (LOFAR).</p>
+      <p>I was also involved in the development of the REALtime Transient Acquisition
+        (<a href="http://lofar.ie/realta-launch/">REALTA</a>) cluster for recording and processing
+        data from the Irish LOFAR station <a href="http://lofar.ie">I-LOFAR</a> in Birr, Co. Offaly.
+      I was once one of I-LOFAR's Chief Observers regularly monitoring the sun for radio signatures of solar activity.</p>
+    </div>
+
+    
+    <div class="w3-third w3-container">
+      <img src="{% static 'pages/images/Pearse_Dunsink_Photo.png' %}" alt="Me infront of Dunsink Observatory" width="100%"> 
+      <!--<p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
+      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>-->
+    </div>
+  </div>
+  
+  <div class="w3-row">
+    <div class="w3-third w3-container">
+      <h1 class="w3-text-teal">Contact</h1>
+      <p>
+        Bâtiment 14,<br>
+        Observatoire de Paris site de Meudon,<br>
+        5 place Jules Janssen,<br>
+        F-92195 Meudon cedex,<br>
+        France        
+      </p>
+      <p><a href="mailto:pearse.murphy@obspm.fr">pearse.murphy@obspm.fr</a></p>
+    </div>
+    <div class="w3-third w3-container">
+      <h1 class="w3-text-teal">Find me online</h1>
+      <p>Mastodon: <a href="https://mastodon.dias.ie/@murphp30">@murphp30@mastodon.dias.ie</a></p>
+      <p>Github: <a href="https://github.com/murphp30">murphp30</a></p>
+    </div>
+      <!--
+    <div class="w3-third w3-container">
+      <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
+      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
+    </div>
+  -->
+  </div>
+{% endblock main %}  
+ 

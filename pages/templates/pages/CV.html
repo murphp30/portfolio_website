@@ -1,0 +1,56 @@
+{% extends "webpage0.html" %}
+{% load static %}
+{% block main %}
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div class="w3-main" style="margin-left:250px">
+
+  <div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">Cirriculum Vitae <a href="{% static 'pages/Pearse_Murphy_Curriculum_Vitae.pdf' %}">(pdf)</a></h1>
+      <h3 class="w3-text-green">Education</h3>
+      <h4>PhD. in Astrophysics</h4>
+      <p>Trinity College Dublin and Dublin Institute for Advanced Studies 2017-2022</p>
+      <h4>B.A. Mod. Phyics and Astrophysics</h4>
+      <p>Trinity College Dublin 2013-2017<br>
+      First Class Honours and awarded Gold Medal</p>
+      <h3 class="w3-text-green">Work Experience</h3>
+      <h4>Postdoctoral Researcher</h4>
+      <p>Observatoire de Paris 2022-Present<br>
+        My research focuses on developing a machine learning algorithm to automatically detect 
+        solar radio bursts in 
+        <a href="https://nenufar.obs-nancay.fr/en/homepage-en/">NenuFAR</a> data.
+        I also use NenuFAR to make radio interferometric images of the Sun
+        at the highest spectral resolutions to date.</p>
+      <h4>Laboratory and Teaching Assistant</h4>
+      <p>Trinity College Dublin 2017-2019<br>
+      I demonstrated in undergraduate physics laboratories for Junior Sophister students.
+      This involved teaching students a breadth of fundamental and applied concepts in physics as well as experimental techniques and how to operate laboratory equipment.</p>
+      <h4>Walton Club Lead Educator</h4>
+      <p>Trinity College Dublin 2017-2019<br>
+      As a lead educator at the <a href="https://www.tcd.ie/waltonclub/">Walton Club</a> I was responsible for designing and teaching a physics and maths syllabus for the club's alphas (secondary school students). I also acted as supervisor for research projects alphas undertake during their final year at Walton Club.</p>
+      <h4>I-LOFAR Construction Team</h4>
+      <p>I-LOFAR, Birr Summer 2017<br>
+      During the summer of 2017 myself and a mix of undergraduates, PhD students, postdoctoral researchers and senior academic staff constructed the Irish LOw Frequency ARray (I-LOFAR) station. This included laying approximately 42 km of coaxial cable, assembling 3072 antennae for 96 High Band Antenna tiles, assembling 96 Low Band Antennae and connecting them to the local correlator.
+      <h3 class="w3-text-green">Skills</h3>
+      <h4>Software</h4>
+      <p>Python: 8+ years experience<br>
+        Bash: 5+ years experience<br>
+        Git: 3+ years experience<br>
+      </p>
+      <h4>Operating Systems</h4>
+      <p>Mac OSX, Linux Ubuntu and Windows 10</p>
+      <h3 class="w3-text-green">Other Interests</h3>
+      <p>Bouldering, musical theatre, playing guitar, singing<p>
+    </div>
+
+
+    
+   <!--  <div class="w3-third w3-container">
+      <img src="images/Trinity_Main_Logo.jpg" class=" w3-padding-large w3-padding-32 w3-center" alt="TCD Logo" width="50%"> 
+     <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
+      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
+    </div> -->
+  </div>
+ 
+  {% endblock main %}
+  

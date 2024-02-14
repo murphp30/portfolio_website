@@ -4,70 +4,81 @@
 <head>
     <meta charset="utf-8" />
     <title>Diplomacy Country Assignment</title>
-   
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'diplomacy_country_assignment/style.css' %}">
 </head>
 <body>
     
-        <h1>Hello and welcome to the Diplomacy Country Assignment tool.</h1>
-        <form action="" method="post">
-            {{ formset.management_form}}
-            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-            {% csrf_token %}
-        <table>
-            <thead>
-                {% for form in formset|slice:":1" %}
-                <tr>
-                    
-                        {% for field in form %}
-                            
+        <h1>Diplomacy Country Assignment tool.</h1>
+        <div id="intro">
+            <p>This is a simple form that will randomly assign countries to players for a game of 
+            <a href="https://en.wikipedia.org/wiki/Diplomacy_(game)">Diplomacy</a>,
+                ensuring that no player will be assigned a country they have previously played.
+            </p>
+            <p>Input the names and email addresses of all the players for your next game of Diplomacy.
+            For each player, indicate the countries they have previously played.
+            An email will be sent to each player indicating their assigned country. 
+            </p>
+        </div>
+        <div>
+            <form action="" method="post">
+                {{ formset.management_form}}
+                {% csrf_token %}
+            <table>
+                <thead>
+                    {% for form in formset|slice:":1" %}
+                        <tr>
+                            {% for field in form %}
                                 {% if field.label != "Countries" %}
                                     <th title="{{ field.help_text }}" rowspan="2">{{ field.label }}</th>
                                 {% else %}
                                     <th title="{{ field.help_text }}" colspan="7">{{ field.label }}</th>
-                                    
                                 {% endif %}
-                            
-
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            {% for field in form %}
+                                {% if field.label == "Countries" %}
+                                    {% for check in field.subwidgets %}
+                                        <th>{{ check.data.label }}</th>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </thead>
+                <tbody>
+                    {% for form in formset %}
+                    <tr>
+                        {% for field in form %}
+                            {% if field.label != "Countries" %}
+                                <td>{{ field }}
+                                    {% if field.errors %}
+                                        <div class="alert alert-danger">
+                                            {{ field.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                            </td>
+                            {% else %}
+                                {% for check in form.countries %}
+                                    <td>
+                                        <label for="{{ check.id_for_label }}">{{ check.tag }}</label>
+                                    </td>
+                                {% endfor %}
+                            {% endif %}
                         {% endfor %}
-                    
-                </tr>
-                <tr>
-                    {% for field in form %}
-                        {% if field.label == "Countries" %}
-                            {% for check in field.subwidgets %}
-                            
-                            <th>{{ check.data.label }}</th>
-                            
-                            {% endfor %}
-                        {% endif %}
+                    </tr>
                     {% endfor %}
-                </tr>
-                {% endfor %}
-            </thead>
-            <tbody>
-                {% for form in formset %}
-                <tr>
-                    {% for field in form %}
-                    
-                        {% if field.label != "Countries" %}
-                            <td>{{ field }}</td>
-                        {% else %}
-                            {% for check in form.countries %}
-                                <td>
-                                    <label for="{{ check.id_for_label }}">{{ check.tag }}</label>
-                                </td>
-                            {% endfor %}
-                        {% endif %}
-                    
-                    {% endfor %}
-
-                </tr>
-                
-                {% endfor %}
-            </tbody>
-        </table>
-        <input type="submit" value="Submit">
-        </form>
+                </tbody>
+            </table>
+            <input type="submit" value="Submit">
+            </form>
+        </div>
 </body>
 </html>
