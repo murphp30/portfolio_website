@@ -127,10 +127,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'mail.cp.dias.ie'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
+# Don't do email stuff until I figure out how to protect against spam
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'mail.cp.dias.ie'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+# EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+# DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']

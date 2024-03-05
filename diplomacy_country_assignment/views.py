@@ -11,11 +11,15 @@ from diplomacy_country_assignment.forms import AssignmentForm, COUNTRIES_CHOICES
 
 # Create your views here.
 def country_assign(formset):
+    """
+    Assign countries by shuffling until a new configuration is reached.
+    TODO: Figure out how to handle emails securely and protect against spam.
+    """
     disallowed = {}
-    player_emails = {}
+    # player_emails = {}
     for form in formset:
         disallowed[form.cleaned_data["player_name"]] = form.cleaned_data["countries"]
-        player_emails[form.cleaned_data["player_name"]] = form.cleaned_data["player_email"]
+        # player_emails[form.cleaned_data["player_name"]] = form.cleaned_data["player_email"]
     # ensure all lists are same length
     max_games = np.max([len(val) for val in disallowed.values()])
     for player in disallowed:
@@ -32,7 +36,7 @@ def country_assign(formset):
     attempts = 0
 
     while (np.sum(samsies) != 0) and (attempts < 100):
-        #loop to make sure you haven't played that country before
+        # loop to make sure you haven't played that country before
         shuffle(player_names)
         shuffle(countries)
         dis = np.array([disallowed[player] for player in player_names])
@@ -42,11 +46,11 @@ def country_assign(formset):
 
 
     new_roles = {player:COUNTRIES_CHOICES[country] for player, country in zip(player_names,countries)}
-    messages = []
-    for player in new_roles:
-        messages.append(email_players(player, player_emails[player], new_roles[player]))
-    messages = tuple(messages)
-    send_mass_mail(messages, fail_silently=False)
+    # messages = []
+    # for player in new_roles:
+    #     messages.append(email_players(player, player_emails[player], new_roles[player]))
+    # messages = tuple(messages)
+    # send_mass_mail(messages, fail_silently=False)
     return new_roles
 
 def email_players(name, email, country):
@@ -80,7 +84,8 @@ def assignment(request):
             new_roles = country_assign(formset)
             return render(request,
                 'diplomacy_country_assignment/success.html',
-                {"new_roles" : new_roles}
+                {"new_roles" : new_roles,
+                 "formset":formset}
                 )
     
     else:

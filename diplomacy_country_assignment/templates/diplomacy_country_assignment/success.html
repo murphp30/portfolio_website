@@ -7,5 +7,21 @@
 
 {% block page_content %}
     <h2>Success!</h2>
-    <p>All players will receive an email detailing their starting country shortly.</p>
+    <ul>
+        {% for player, role in new_roles.items %}
+            <li>{{player}} will play as {{role}}</li>
+        {% endfor %}
+    </ul>
+    <p>Have fun!</p>
+    <form action="" method="post">
+        {{ formset.management_form}}
+        {% csrf_token %}
+        {% for form in formset %}
+            {% for field in form %}
+                {{field.as_hidden}}
+            {% endfor %}
+        {% endfor %}
+        <input type="submit" value="Reassign same players">
+        <!-- <button type="submit" onclick="window.location.reload();">Reassign same players</button> -->
+    <button type="button" onclick="location.href='{% url "diplomacy_country_assignment:assignment" %}'">Assign new players</button>
 {% endblock page_content %}
