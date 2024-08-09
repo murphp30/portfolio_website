@@ -30,12 +30,12 @@ def results(request):
                         the bus for NATO.",
         "Francis 'The Viper' Higgins": "From the mean streets of Castletown \
                                         to an internet media mogul.",
-        "Fontaine": "I'm here to inform you, you got a son!",
+        "Fontaine": "I'm here to inform you, you've got a son!",
         "Conor Williams": "You have a mysterious past but that's ok \
                            because you can drive away from it in the new \
                            Mercedes E class.",
         "The Purple Onion": "A senior ticket for yourself is it? \
-                             You enjoy the simpler thhings in life, \
+                             You enjoy the simpler things in life, \
                              like riding the bus ten times a day.",
         "John's father": "A great man, gone! \
                           You should Zurich it up incase you meet a similar \
